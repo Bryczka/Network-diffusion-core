@@ -11,7 +11,7 @@ namespace network_diffusion_core.NetworkGenerators
             List<Edge> generatedEdges = new();
             int edgeId = 0;
 
-            for (int i = 0; i < nodesCount - 2; i++)
+            for (int i = 0; i < nodesCount; i++)
             {
                 generatedNodes.Add(new Node(i, "black", "none"));
                 generatedEdges.AddRange(

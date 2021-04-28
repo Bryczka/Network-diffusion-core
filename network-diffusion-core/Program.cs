@@ -26,8 +26,11 @@ namespace network_diffusion_core
             //var network = regularNetwork.GenerateRegularNetwork(5);
 
 
-            var smallWorldNetwork = new SmallWorldNetwork();
-            var network = smallWorldNetwork.GenerateSmallWorldNetwork(10, 0.5);
+            //var smallWorldNetwork = new SmallWorldNetwork();
+            //var network = smallWorldNetwork.GenerateSmallWorldNetwork(10, 1);
+
+            var scaleFreeNetwork = new ScaleFreeNetwork();
+            var network = scaleFreeNetwork.GenerateScaleFreeNetwork(1000);
 
             Console.ReadKey();
 
