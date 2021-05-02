@@ -1,21 +1,27 @@
 ﻿using network_diffusion_core.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace network_diffusion_core.NetworkGenerators
 {
     public class SmallWorldNetwork
     {
-        public Network GenerateSmallWorldNetwork(int nodesCount, double probability)
+        public Network GenerateSmallWorldNetwork(int nodesCount)
         {
 
             var regularNetwork = new RegularNetwork();
             var generatedRegularNetwork = regularNetwork.GenerateRegularNetwork(nodesCount);
             var modifiedEdges = 0;
+            double probability = 0.1;
 
-            while (modifiedEdges > probability * nodesCount)
+            while (modifiedEdges < probability * nodesCount)
             {
-                var randomNodes = TwoRandomNodes(nodesCount);
+                var randomNodes = TwoRandomNodes(nodesCount - 1);
+                while (generatedRegularNetwork.Edges.Where(x => x.From == randomNodes[0]).FirstOrDefault() == null)
+                {
+                    randomNodes = TwoRandomNodes(nodesCount - 1);
+                };
                 var firstRandomEdge = generatedRegularNetwork.Edges.Where(x => x.From == randomNodes[0]).FirstOrDefault();
                 var secondRandomEdge = generatedRegularNetwork.Edges.Where(x => x.From == randomNodes[1]).FirstOrDefault();
                 generatedRegularNetwork.Edges.Remove(firstRandomEdge);
@@ -37,7 +43,6 @@ namespace network_diffusion_core.NetworkGenerators
             {
                 rnd1 = random.Next(nodesCount - 1);
             }
-
             return new int[] { rnd, rnd1 };
         }
     }

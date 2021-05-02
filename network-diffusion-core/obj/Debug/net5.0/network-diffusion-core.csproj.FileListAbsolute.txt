@@ -21,3 +21,13 @@ C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacj
 C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\obj\Debug\net5.0\ref\network-diffusion-core.dll
 C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\obj\Debug\net5.0\network-diffusion-core.pdb
 C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\obj\Debug\net5.0\network-diffusion-core.genruntimeconfig.cache
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\obj\Debug\net5.0\network-diffusion-core.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\obj\Debug\net5.0\network-diffusion-core.csproj.CopyComplete
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\mbry\OneDrive - Wojskowa Akademia Techniczna\Praca magisterska\Aplikacja\NetCore\network-diffusion-core\network-diffusion-core\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

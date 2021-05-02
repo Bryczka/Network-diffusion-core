@@ -6,16 +6,17 @@ namespace network_diffusion_core.NetworkGenerators
 {
     public class RandomNetwork
     {
-        public Network GenerateRandomNetwork(int nodesCount, double probability)
+        public Network GenerateRandomNetwork(int nodesCount)
         {
             List<Node> generatedNodes = new();
             List<Edge> generatedEdges = new();
             int edgeId = 0;
             var random = new Random();
+            double probability = 0.1;
 
             for (int i = 0; i < nodesCount; i++)
             {
-                generatedNodes.Add(new Node(i, "black", "none"));
+                generatedNodes.Add(new Node(i, "#b4ff42", "none"));
 
                 for (int j = i + 1; j < nodesCount; j++)
                 {

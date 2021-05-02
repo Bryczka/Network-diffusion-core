@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace network_diffusion_core.Model
 {
@@ -14,8 +12,16 @@ namespace network_diffusion_core.Model
             Title = title;
         }
 
+        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int NodeId { get; set; }
+
+        [JsonPropertyName("color")]
+        [JsonProperty("color")]
         public string Color { get; set; }
+
+        [JsonPropertyName("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
     }
 }

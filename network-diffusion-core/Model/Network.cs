@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace network_diffusion_core.Model
@@ -16,7 +18,13 @@ namespace network_diffusion_core.Model
         {
 
         }
+
+        [JsonPropertyName("nodes")]
+        [JsonProperty("nodes")]
         public List<Node> Nodes { get; set; }
-        public List<Edge> Edges {get; set;}
+
+        [JsonPropertyName("edges")]
+        [JsonProperty("edges")]
+        public List<Edge> Edges { get; set; }
     }
 }

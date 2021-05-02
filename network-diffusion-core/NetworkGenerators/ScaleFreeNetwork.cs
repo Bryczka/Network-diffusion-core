@@ -17,24 +17,24 @@ namespace network_diffusion_core.NetworkGenerators
             int edgeId = 0;
             int nodeId = 0;
 
-            for (int i = 0; i < baseNodesCount - 1; i++)
+            for (int i = 0; i < nodesCount - 1; i++)
             {
-                generatedNodes.Add(new Node(nodeId++, "black", "none"));
-                generatedEdges.Add(new Edge(edgeId++, i, i + 1));
-            }
-            generatedNodes.Add(new Node(nodeId++, "black", "none"));
-            generatedEdges.Add(new Edge(edgeId, baseNodesCount - 1, 0));
-
-            for (int i = 0; i < nodesCount - baseNodesCount; i++)
-            {
-                var nodesSelectingPropability = CountNetworkConnectionPropability(generatedEdges, generatedNodes);
-                for (int j = 0; j < 3; j++)
+                if (i < baseNodesCount)
                 {
-                    generatedEdges.Add(new Edge(edgeId++, nodeId, nodesSelectingPropability[j].NodeId));
+                    generatedNodes.Add(new Node(nodeId++, "#b4ff42", "none"));
+                    if (i != 0)
+                    {
+                        generatedEdges.Add(new Edge(edgeId++, i, 0));
+                    }
                 }
-                generatedNodes.Add(new Node(nodeId++, "red", "none"));
-            }
+                else
+                {
+                    generatedNodes.Add(new Node(nodeId, "#b4ff42", "none"));
+                    generatedEdges.Add(new Edge(edgeId++, nodeId++,
+                        SelectNode(CountNetworkConnectionPropability(generatedEdges, generatedNodes))));
+                }
 
+            }
             return new Network(generatedNodes, generatedEdges);
         }
 
@@ -43,12 +43,30 @@ namespace network_diffusion_core.NetworkGenerators
             List<(int NodeId, double Propability)> nodesSelectingPropability = new();
             foreach (var node in generatedNodes)
             {
-                nodesSelectingPropability.Add((node.NodeId,
-                    (generatedEdges.FindAll(x => x.To == node.NodeId).Count + generatedEdges.FindAll(x => x.From == node.NodeId).Count) / generatedEdges.Count));
+                if (node.NodeId != 0)
+                {
+                    nodesSelectingPropability.Add((node.NodeId,
+                        (double)(generatedEdges.FindAll(x => x.To == node.NodeId).Count
+                        + generatedEdges.FindAll(x => x.From == node.NodeId).Count) / generatedEdges.Count));
+                }
             }
-            nodesSelectingPropability.OrderBy(x => x.Propability);
             return nodesSelectingPropability;
         }
 
+        private int SelectNode(List<(int NodeId, double Propability)> nodesSelectingPropability)
+        {
+            Random random = new();
+            var rnd = random.NextDouble() * nodesSelectingPropability.Sum(x => x.Propability);
+            double sum = 0;
+            foreach (var item in nodesSelectingPropability)
+            {
+                sum += item.Propability;
+                if (sum > rnd)
+                {
+                    return item.NodeId;
+                }
+            }
+            return -1;
+        }
     }
 }
