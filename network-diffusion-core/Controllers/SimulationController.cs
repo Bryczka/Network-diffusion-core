@@ -13,22 +13,31 @@ namespace network_diffusion_core.Controllers
     [ApiController]
     public class SimulationController : ControllerBase
     {
-        [HttpPut("{infectionRate}/{iterationCount}")]
-        public string GetSiSimultion(double infectionRate, int iterationCount, [FromBody] Network network)
+        [HttpPost("{modelType}/{infectionRate}/{recoveryRate}/{iterationCount}")]
+        public string GetSiSimultion(double infectionRate, double recoveryRate, int iterationCount, int modelType, [FromBody] Network network)
         {
+            //SIS MODEL
             var simodel = new SiModel();
             var currentInfections = new List<List<Node>>();
-
-            var currentStep = simodel.CalculateSimulation(network, null, 0.4);
-
+            var currentStep = simodel.CalculateSimulation(network, null, infectionRate, recoveryRate);
             currentInfections.Add(currentStep.currentInfectedNodes);
-
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < iterationCount - 1; i++)
             {
-                currentStep = simodel.CalculateSimulation(network, currentStep.infectedNodes, 0.4);
+                currentStep = simodel.CalculateSimulation(network, currentStep.infectedNodes, infectionRate, recoveryRate);
                 currentInfections.Add(new List<Node>(currentStep.currentInfectedNodes));
             }
             return JsonSerializer.Serialize(currentInfections);
+
+            //var simodel = new SirModel();
+            //var currentInfections = new List<List<Node>>();
+            //var currentStep = simodel.CalculateSimulation(network, null, infectionRate, recoveryRate);
+            //currentInfections.Add(currentStep.currentInfectedNodes);
+            //for (int i = 0; i < iterationCount - 1; i++)
+            //{
+            //    currentStep = simodel.CalculateSimulation(network, currentStep.infectedNodes, infectionRate, recoveryRate);
+            //    currentInfections.Add(new List<Node>(currentStep.currentInfectedNodes));
+            //}
+            //return JsonSerializer.Serialize(currentInfections);
         }
     }
 }

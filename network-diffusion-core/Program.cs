@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using network_diffusion_core.DiffusionModels;
 using network_diffusion_core.Model;
 using network_diffusion_core.NetworkGenerators;
+using network_diffusion_core.NetworkStatistics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,7 +18,7 @@ namespace network_diffusion_core
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
 
             /*
              * Network Tests
@@ -25,9 +26,10 @@ namespace network_diffusion_core
             //Stopwatch sw = new Stopwatch();
 
             //sw.Start();
-            //var randomNetwork = new RandomNetwork();
-            //var network = randomNetwork.GenerateRandomNetwork(1000);
-
+            var randomNetwork = new RandomNetwork();
+            var network = randomNetwork.GenerateRandomNetwork(1000);
+            var nsc = new NetworkStatsCounter();
+            nsc.CalculateDegreeDistribution(network);
             //var regularNetwork = new RegularNetwork();
             //var network = regularNetwork.GenerateRegularNetwork(1000);
 

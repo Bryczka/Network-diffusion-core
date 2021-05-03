@@ -21,7 +21,7 @@ namespace network_diffusion_core.NetworkGenerators
             {
                 if (i < baseNodesCount)
                 {
-                    generatedNodes.Add(new Node(nodeId++, "#b4ff42", "none"));
+                    generatedNodes.Add(new Node(nodeId++, Utils.susceptibleColor, Utils.susceptibleTitle));
                     if (i != 0)
                     {
                         generatedEdges.Add(new Edge(edgeId++, i, 0));
@@ -29,7 +29,7 @@ namespace network_diffusion_core.NetworkGenerators
                 }
                 else
                 {
-                    generatedNodes.Add(new Node(nodeId, "#b4ff42", "none"));
+                    generatedNodes.Add(new Node(nodeId, Utils.susceptibleColor, Utils.susceptibleTitle));
                     generatedEdges.Add(new Edge(edgeId++, nodeId++,
                         SelectNode(CountNetworkConnectionPropability(generatedEdges, generatedNodes))));
                 }

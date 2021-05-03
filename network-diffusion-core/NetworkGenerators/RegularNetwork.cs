@@ -13,7 +13,7 @@ namespace network_diffusion_core.NetworkGenerators
 
             for (int i = 0; i < nodesCount; i++)
             {
-                generatedNodes.Add(new Node(i, "#b4ff42", "none"));
+                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle));
                 generatedEdges.AddRange(
                 new Edge[]
                 {
