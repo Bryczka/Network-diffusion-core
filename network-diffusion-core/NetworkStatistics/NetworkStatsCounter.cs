@@ -7,36 +7,43 @@ using System.Threading.Tasks;
 namespace network_diffusion_core.NetworkStatistics
 {
     public class NetworkStatsCounter
-    {
-        //Średni stopień
-        //Liczba zdrowych
-        //Liczba zarażonych
-        //Rozkład stopni
-        //Rozkład współczynnika gronowania
-        
-        public double CalculateMeanDegree(Network network)
-        {
-            var degreeSum = 0;
-            foreach (var node in network.Nodes)
-            {
-                degreeSum += network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId).Count;
-            }
-
-            return degreeSum/network.Nodes.Count;
-        }
-
-        public List<(int Degree , int Count)> CalculateDegreeDistribution (Network network)
+    {        
+        //Średni stopień i rozkład stopnii
+        public (double MeanDegree, List<(int Degree, int Count)> DegreeHistogram, List<int> NodesDegree) CalculateDegreeStatistics(Network network)
         {
             var degreesList = new List<int>();
             foreach (var node in network.Nodes)
             {
-                degreesList.Add(network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId).Count);
+                var degree = network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId).Count;
+                degreesList.Add(degree);
             }
+            double meanDegree = (double)degreesList.Sum() / network.Nodes.Count;
+            var degreeHistogram = degreesList.GroupBy(i => i).Select(x => (x.Key, x.Count())).OrderBy(x => x.Key).ToList();
+            return (meanDegree, degreeHistogram, degreesList);
+        }
 
-            var degreeHistogram = degreesList.GroupBy(i => i).Select(x => ( x.Key, x.Count() )).OrderBy(x=>x.Key).ToList();
-            return degreeHistogram;
+        //Średni współczynnik gronowania i rozkład współczynnika
+
+        public (double MeanClusteringRate, List<(double CluseringRate, int Count)>, List<double> NodesClusteringRate) CalculateClusteringRateStatistics(Network network)
+        {
+            var clusteringRatesList = new List<double>();
+
+            foreach (var node in network.Nodes)
+            {
+                var nodesId = new List<int>();
+                double degree = network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId).Count;
+                var connectedEdges = network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId);
+                nodesId.AddRange(connectedEdges.Where(x => x.From != node.NodeId).Select(x => x.From));
+                nodesId.AddRange(connectedEdges.Where(x => x.To != node.NodeId).Select(x => x.To));
+                var connectionCount = network.Edges.Where(x => nodesId.Contains(x.From) && nodesId.Contains(x.To)).Count();
+                clusteringRatesList.Add(2 * connectionCount / degree * (degree - 1));
+            }
+            var clusteringRateHistogram = clusteringRatesList.GroupBy(i => i).Select(x => (x.Key, x.Count())).OrderBy(x => x.Key).ToList();
+            double meanClusteringRate = (double) clusteringRatesList.Sum() /  network.Nodes.Count;
+            return (meanClusteringRate, clusteringRateHistogram, clusteringRatesList);
         }
 
         //** Wyrysowanie na sieci grafik z wiki (miary centralności)
+
     }
 }

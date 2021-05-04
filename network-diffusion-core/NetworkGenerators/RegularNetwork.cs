@@ -7,13 +7,14 @@ namespace network_diffusion_core.NetworkGenerators
     {
         public Network GenerateRegularNetwork(int nodesCount)
         {
+            //BUG: dodaje dwie krawędzie w pewnym przypadku
             List<Node> generatedNodes = new();
             List<Edge> generatedEdges = new();
             int edgeId = 0;
 
             for (int i = 0; i < nodesCount; i++)
             {
-                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle));
+                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle, NodeStatus.Susceptible));
                 generatedEdges.AddRange(
                 new Edge[]
                 {

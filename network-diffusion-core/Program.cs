@@ -18,7 +18,7 @@ namespace network_diffusion_core
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
 
             /*
              * Network Tests
@@ -26,10 +26,13 @@ namespace network_diffusion_core
             //Stopwatch sw = new Stopwatch();
 
             //sw.Start();
-            var randomNetwork = new RandomNetwork();
-            var network = randomNetwork.GenerateRandomNetwork(1000);
-            var nsc = new NetworkStatsCounter();
-            nsc.CalculateDegreeDistribution(network);
+
+            //var randomNetwork = new RandomNetwork();
+            //var network = randomNetwork.GenerateRandomNetwork(50);
+            //var nsc = new NetworkStatsCounter();
+            //nsc.CalculateClusteringRateStatistics(network);
+            //nsc.CalculateClusteringRateStatistics(network);
+
             //var regularNetwork = new RegularNetwork();
             //var network = regularNetwork.GenerateRegularNetwork(1000);
 

@@ -12,11 +12,11 @@ namespace network_diffusion_core.NetworkGenerators
             List<Edge> generatedEdges = new();
             int edgeId = 0;
             var random = new Random();
-            double probability = 0.1;
+            double probability = 0.05;
 
             for (int i = 0; i < nodesCount; i++)
             {
-                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle));
+                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle, NodeStatus.Susceptible));
 
                 for (int j = i + 1; j < nodesCount; j++)
                 {

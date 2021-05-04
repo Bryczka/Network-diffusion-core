@@ -18,7 +18,7 @@ namespace network_diffusion_core.DiffusionModels
                 infectedNodes = new List<Node>();
                 var randomNodeId = random.Next(0, network.Nodes.Count - 1);
                 var firstInfectedNode = network.Nodes.Find(x => x.NodeId == randomNodeId);
-                nodesToUpdate.Add(new Node(firstInfectedNode.NodeId, Utils.infectedColor, Utils.infectedTitle));
+                nodesToUpdate.Add(new Node(firstInfectedNode.NodeId, Utils.infectedColor, Utils.infectedTitle, NodeStatus.Infected));
                 infectedNodes.Add(firstInfectedNode);
                 return (infectedNodes, nodesToUpdate);
             }
@@ -40,7 +40,7 @@ namespace network_diffusion_core.DiffusionModels
             for (int i = 0; i < infectedNodes.Count; i++)
                 if (random.NextDouble() < recoveryRate)
                 {
-                    var recoveredNode = new Node(infectedNodes[i].NodeId, Utils.susceptibleColor, Utils.susceptibleTitle);
+                    var recoveredNode = new Node(infectedNodes[i].NodeId, Utils.susceptibleColor, Utils.susceptibleTitle, NodeStatus.Susceptible);
                     nodesToUpdate.Add(recoveredNode);
                     infectedNodes.Remove(infectedNodes[i]);
                 }
@@ -49,7 +49,7 @@ namespace network_diffusion_core.DiffusionModels
             {
                 if (random.NextDouble() < infenctionRate && !infectedNodes.Contains(node) && node != null)
                 {
-                    nodesToUpdate.Add(new Node(node.NodeId, Utils.infectedColor, Utils.infectedTitle));
+                    nodesToUpdate.Add(new Node(node.NodeId, Utils.infectedColor, Utils.infectedTitle, NodeStatus.Infected));
                     infectedNodes.Add(node);
                 }
             }
