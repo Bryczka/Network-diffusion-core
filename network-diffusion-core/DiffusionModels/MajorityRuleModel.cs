@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace network_diffusion_core.DiffusionModels
 {
-    public class VoterModel
+    public class MajorityRuleModel
     {
         public List<List<Node>> CalculateSimulation(Network network, List<NodeState> nodeStates, int iterationCount)
         {
@@ -22,20 +22,37 @@ namespace network_diffusion_core.DiffusionModels
             return currentIterationChanges;
 
         }
+
         private List<Node> BaseIteration(Network network, List<NodeState> nodeStates, Random random)
         {
             var currentIterationNodes = new List<Node>();
+            var randomList = new List<int>();
+            var groupSize = 10;
 
             if (network.ChangedByDiffusion == false)
                 return Utils.GenerateRandomNetworkOpinions(network, nodeStates);
 
-            var rnd = random.Next(0, network.Nodes.Count - 1);
-            var node = network.Nodes.Find(x => x.NodeId == rnd);
-            var connectedNodes = Utils.GetConnectedNodes(node.NodeId, network);
-            var secondNode = connectedNodes[random.Next(connectedNodes.Count)];
+            while (randomList.Count < groupSize)
+            {
+                var rnd = random.Next(0, network.Nodes.Count - 1);
+                if (!randomList.Contains(rnd))
+                {
+                    randomList.Add(rnd);
+                }
+            }
 
-            Utils.ChangeNodeStatus(node, nodeStates.Find(x => x.Id == secondNode.NodeStateId));
-            currentIterationNodes.Add(node);
+            var selectedNodes = randomList.Select(x => network.Nodes.Find(y => y.NodeId == x)).ToList();
+
+            if (selectedNodes.Average(x => x.NodeStateId) < 0.5)
+            {
+                selectedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates[0]));
+            }
+            else
+            {
+                selectedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates[1]));
+            }
+
+            selectedNodes.ForEach(x => currentIterationNodes.Add(x));
             return currentIterationNodes;
 
         }

@@ -16,7 +16,7 @@ namespace network_diffusion_core.NetworkGenerators
 
             for (int i = 0; i < nodesCount; i++)
             {
-                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle, NodeStatus.Susceptible));
+                generatedNodes.Add(new Node(i, Utils.susceptibleColor, Utils.susceptibleTitle, Utils.susceptibleId));
 
                 for (int j = i + 1; j < nodesCount; j++)
                 {

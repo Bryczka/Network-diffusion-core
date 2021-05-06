@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace network_diffusion_core.NetworkStatistics
 {
-    public class NetworkStatsCounter
+    public static class NetworkStatsCounter
     {        
         //Średni stopień i rozkład stopnii
-        public (double MeanDegree, List<(int Degree, int Count)> DegreeHistogram, List<int> NodesDegree) CalculateDegreeStatistics(Network network)
+        public static (double MeanDegree, List<(int Degree, int Count)> DegreeHistogram, List<int> NodesDegree) CalculateDegreeStatistics(Network network)
         {
             var degreesList = new List<int>();
             foreach (var node in network.Nodes)
@@ -24,7 +24,7 @@ namespace network_diffusion_core.NetworkStatistics
 
         //Średni współczynnik gronowania i rozkład współczynnika
 
-        public (double MeanClusteringRate, List<(double CluseringRate, int Count)>, List<double> NodesClusteringRate) CalculateClusteringRateStatistics(Network network)
+        public static (double MeanClusteringRate, List<(double CluseringRate, int Count)>, List<double> NodesClusteringRate) CalculateClusteringRateStatistics(Network network)
         {
             var clusteringRatesList = new List<double>();
 

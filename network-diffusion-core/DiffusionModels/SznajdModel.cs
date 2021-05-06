@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace network_diffusion_core.DiffusionModels
 {
-    public class VoterModel
+    public class SznajdModel
     {
         public List<List<Node>> CalculateSimulation(Network network, List<NodeState> nodeStates, int iterationCount)
         {
@@ -22,20 +22,30 @@ namespace network_diffusion_core.DiffusionModels
             return currentIterationChanges;
 
         }
+
         private List<Node> BaseIteration(Network network, List<NodeState> nodeStates, Random random)
         {
             var currentIterationNodes = new List<Node>();
+            var randomList = new List<int>();
 
             if (network.ChangedByDiffusion == false)
                 return Utils.GenerateRandomNetworkOpinions(network, nodeStates);
 
             var rnd = random.Next(0, network.Nodes.Count - 1);
-            var node = network.Nodes.Find(x => x.NodeId == rnd);
-            var connectedNodes = Utils.GetConnectedNodes(node.NodeId, network);
+            var firstNode = network.Nodes.Find(x => x.NodeId == rnd);
+            var connectedNodes = Utils.GetConnectedNodes(firstNode.NodeId, network);
             var secondNode = connectedNodes[random.Next(connectedNodes.Count)];
 
-            Utils.ChangeNodeStatus(node, nodeStates.Find(x => x.Id == secondNode.NodeStateId));
-            currentIterationNodes.Add(node);
+            if (firstNode.NodeStateId == secondNode.NodeStateId)
+            {
+                var exposedNodes = 
+                    Utils.GetConnectedNodes(firstNode.NodeId, network)
+                        .Concat(Utils.GetConnectedNodes(secondNode.NodeId, network))
+                        .ToList();
+
+                exposedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates.Find(x=>x.Id == firstNode.NodeStateId)));
+                exposedNodes.ForEach(x => currentIterationNodes.Add(x));
+            }
             return currentIterationNodes;
 
         }

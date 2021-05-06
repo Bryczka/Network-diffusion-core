@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using network_diffusion_core.NetworkGenerators;
+using network_diffusion_core.NetworkStatistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace network_diffusion_core.Controller
 {
@@ -14,7 +13,6 @@ namespace network_diffusion_core.Controller
     [ApiController]
     public class NetworkController : ControllerBase
     {
-        // GET: api/<NetworkController>
         [HttpGet("{type}/{nodesCount}")]
         public string Get(int type, int nodesCount)
         {
@@ -34,24 +32,6 @@ namespace network_diffusion_core.Controller
                     return JsonSerializer.Serialize(smallWorldNetwork.GenerateSmallWorldNetwork(nodesCount));
             }
             return "";
-        }
-
-        // POST api/<NetworkController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<NetworkController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<NetworkController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

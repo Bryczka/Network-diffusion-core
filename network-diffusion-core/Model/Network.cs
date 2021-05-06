@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using network_diffusion_core.NetworkStatistics;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,11 @@ namespace network_diffusion_core.Model
 {
     public class Network
     {
-        public Network(List<Node> nodes, List<Edge> edges)
+        public Network(List<Node> nodes, List<Edge> edges, bool changedByDiffusion = false)
         {
             Nodes = nodes;
             Edges = edges;
+            ChangedByDiffusion = changedByDiffusion;
         }
         public Network()
         {
@@ -26,5 +28,8 @@ namespace network_diffusion_core.Model
         [JsonPropertyName("edges")]
         [JsonProperty("edges")]
         public List<Edge> Edges { get; set; }
+
+        public bool ChangedByDiffusion { get; set; }
+
     }
 }

@@ -5,12 +5,12 @@ namespace network_diffusion_core.Model
 {
     public class Node
     {
-        public Node(int nodeId, string color, string title, NodeStatus nodeStatus)
+        public Node(int nodeId, string color, string title, int nodeStateId)
         {
             NodeId = nodeId;
             Color = color;
             Title = title;
-            NodeStatus = nodeStatus;
+            NodeStateId = nodeStateId;
         }
 
         [JsonPropertyName("id")]
@@ -25,6 +25,6 @@ namespace network_diffusion_core.Model
         [JsonProperty("title")]
         public string Title { get; set; }
 
-        public NodeStatus NodeStatus { get; set; }
+        public int NodeStateId { get; set; }
     }
 }
