@@ -21,7 +21,6 @@ namespace network_diffusion_core.DiffusionModels
             }
 
             return currentIterationChanges;
-
         }
 
         private List<Node> BaseIteration(Network network, List<NodeState> nodeStates, Random random)
@@ -35,7 +34,7 @@ namespace network_diffusion_core.DiffusionModels
                     .Find(x => x.NodeId == rnd);
                 Utils.ChangeNodeStatus(firstNode, nodeStates[2]);
                 currentIterationNodes.Add(firstNode);
-                return currentIterationNodes;
+                return network.Nodes;
             }
 
             nodeStates
@@ -61,7 +60,7 @@ namespace network_diffusion_core.DiffusionModels
                 .ToList()
                 .ForEach(x => UpdateNodesState(network, currentIterationNodes, x));
 
-            return currentIterationNodes;
+            return network.Nodes;
         }
 
         private static void UpdateNodesState(Network network, List<Node> currentIterationChanges, NodeState state)
@@ -72,6 +71,7 @@ namespace network_diffusion_core.DiffusionModels
                 .Where(x => random.NextDouble() < state.ChangeToPropabilityRate)
                 .Select(x => Utils.ChangeNodeStatus(x, state))
                 .ToList());
+            var a = 321;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace network_diffusion_core.DiffusionModels
             }
 
             selectedNodes.ForEach(x => currentIterationNodes.Add(x));
-            return currentIterationNodes;
+            return network.Nodes;
 
         }
     }

@@ -36,7 +36,7 @@ namespace network_diffusion_core.DiffusionModels
 
             Utils.ChangeNodeStatus(node, nodeStates.Find(x => x.Id == secondNode.NodeStateId));
             currentIterationNodes.Add(node);
-            return currentIterationNodes;
+            return network.Nodes;
 
         }
     }

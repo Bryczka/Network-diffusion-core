@@ -1,4 +1,5 @@
-﻿using network_diffusion_core.Model;
+﻿using network_diffusion_core.DiffusionModels;
+using network_diffusion_core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace network_diffusion_core
     public static class Utils
     {
         public static readonly int susceptibleId = 0;
-        public static readonly string susceptibleColor = "#b4ff42";
-        public static readonly string susceptibleTitle = "Susceptible";
+        public static readonly string susceptibleColor = "green";
+        public static readonly string susceptibleTitle = "Podatny";
 
         public static readonly int infectedId = 99;
-        public static readonly string infectedColor = "#ff9999";
-        public static readonly string infectedTitle = "Infected";
+        public static readonly string infectedColor = "red";
+        public static readonly string infectedTitle = "Zainfekowany";
 
         public static List<Node> GetConnectedNodes(int nodeId, Network network)
         {
@@ -44,17 +45,18 @@ namespace network_diffusion_core
             {
                 if (random.NextDouble() < 0.5)
                 {
-                    Utils.ChangeNodeStatus(node, nodeState[0]);
+                    ChangeNodeStatus(node, nodeState[0]);
                     initialNodes.Add(node);
                 }
                 else
                 {
-                    Utils.ChangeNodeStatus(node, nodeState[1]);
+                    ChangeNodeStatus(node, nodeState[1]);
                     initialNodes.Add(node);
                 }
             }
             network.ChangedByDiffusion = true;
             return initialNodes;
         }
+
     }
 }

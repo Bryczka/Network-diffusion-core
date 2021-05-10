@@ -10,6 +10,7 @@ namespace network_diffusion_core.NetworkGenerators
 
             List<Node> generatedNodes = new();
             List<Edge> generatedEdges = new();
+            //connectionCount
             int edgeId = 0;
 
             for (int i = 0; i < nodesCount; i++)

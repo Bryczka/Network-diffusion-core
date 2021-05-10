@@ -9,15 +9,14 @@ namespace network_diffusion_core.NetworkGenerators
 {
     public class ScaleFreeNetwork
     {
-        public Network GenerateScaleFreeNetwork(int nodesCount)
+        public Network GenerateScaleFreeNetwork(int nodesCount, int baseNodesCount)
         {
-            int baseNodesCount = 5;
             List<Node> generatedNodes = new();
             List<Edge> generatedEdges = new();
             int edgeId = 0;
             int nodeId = 0;
 
-            for (int i = 0; i < nodesCount - 1; i++)
+            for (int i = 0; i < nodesCount; i++)
             {
                 if (i < baseNodesCount)
                 {

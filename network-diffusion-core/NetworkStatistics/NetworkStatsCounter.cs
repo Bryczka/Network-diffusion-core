@@ -9,9 +9,9 @@ namespace network_diffusion_core.NetworkStatistics
     public static class NetworkStatsCounter
     {        
         //Średni stopień i rozkład stopnii
-        public static (double MeanDegree, List<(int Degree, int Count)> DegreeHistogram, List<int> NodesDegree) CalculateDegreeStatistics(Network network)
+        public static (double MeanDegree, List<(double Degree, int Count)> DegreeHistogram, List<double> NodesDegree) CalculateDegreeStatistics(Network network)
         {
-            var degreesList = new List<int>();
+            var degreesList = new List<double>();
             foreach (var node in network.Nodes)
             {
                 var degree = network.Edges.FindAll(x => x.From == node.NodeId || x.To == node.NodeId).Count;

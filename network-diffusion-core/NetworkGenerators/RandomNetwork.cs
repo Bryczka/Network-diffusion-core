@@ -6,13 +6,12 @@ namespace network_diffusion_core.NetworkGenerators
 {
     public class RandomNetwork
     {
-        public Network GenerateRandomNetwork(int nodesCount)
+        public Network GenerateRandomNetwork(int nodesCount, double probability)
         {
             List<Node> generatedNodes = new();
             List<Edge> generatedEdges = new();
             int edgeId = 0;
             var random = new Random();
-            double probability = 0.05;
 
             for (int i = 0; i < nodesCount; i++)
             {

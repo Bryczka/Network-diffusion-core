@@ -46,7 +46,7 @@ namespace network_diffusion_core.DiffusionModels
                 exposedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates.Find(x=>x.Id == firstNode.NodeStateId)));
                 exposedNodes.ForEach(x => currentIterationNodes.Add(x));
             }
-            return currentIterationNodes;
+            return network.Nodes;
 
         }
     }

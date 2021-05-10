@@ -7,13 +7,10 @@ namespace network_diffusion_core.NetworkGenerators
 {
     public class SmallWorldNetwork
     {
-        public Network GenerateSmallWorldNetwork(int nodesCount)
+        public Network GenerateSmallWorldNetwork(int nodesCount, double probability)
         {
-
-            var regularNetwork = new RegularNetwork();
-            var generatedRegularNetwork = regularNetwork.GenerateRegularNetwork(nodesCount);
+            var generatedRegularNetwork = new RegularNetwork().GenerateRegularNetwork(nodesCount);
             var modifiedEdges = 0;
-            double probability = 0.1;
 
             while (modifiedEdges < probability * nodesCount)
             {
