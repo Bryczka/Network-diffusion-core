@@ -34,17 +34,19 @@ namespace network_diffusion_core.DiffusionModels
             var rnd = random.Next(0, network.Nodes.Count - 1);
             var firstNode = network.Nodes.Find(x => x.NodeId == rnd);
             var connectedNodes = Utils.GetConnectedNodes(firstNode.NodeId, network);
-            var secondNode = connectedNodes[random.Next(connectedNodes.Count)];
-
-            if (firstNode.NodeStateId == secondNode.NodeStateId)
+            if (connectedNodes.Count != 0)
             {
-                var exposedNodes = 
-                    Utils.GetConnectedNodes(firstNode.NodeId, network)
-                        .Concat(Utils.GetConnectedNodes(secondNode.NodeId, network))
-                        .ToList();
+                var secondNode = connectedNodes[random.Next(connectedNodes.Count)];
+                if (firstNode.NodeStateId == secondNode.NodeStateId)
+                {
+                    var exposedNodes =
+                        Utils.GetConnectedNodes(firstNode.NodeId, network)
+                            .Concat(Utils.GetConnectedNodes(secondNode.NodeId, network))
+                            .ToList();
 
-                exposedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates.Find(x=>x.Id == firstNode.NodeStateId)));
-                exposedNodes.ForEach(x => currentIterationNodes.Add(x));
+                    exposedNodes.ForEach(x => Utils.ChangeNodeStatus(x, nodeStates.Find(x => x.Id == firstNode.NodeStateId)));
+                    exposedNodes.ForEach(x => currentIterationNodes.Add(x));
+                }
             }
             return network.Nodes;
 

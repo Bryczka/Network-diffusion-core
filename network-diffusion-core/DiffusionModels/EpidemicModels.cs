@@ -20,6 +20,8 @@ namespace network_diffusion_core.DiffusionModels
                             .ConvertAll(x => new Node(x.NodeId, x.Color, x.Title, x.NodeStateId)));
             }
 
+
+
             return currentIterationChanges;
         }
 
@@ -71,7 +73,6 @@ namespace network_diffusion_core.DiffusionModels
                 .Where(x => random.NextDouble() < state.ChangeToPropabilityRate)
                 .Select(x => Utils.ChangeNodeStatus(x, state))
                 .ToList());
-            var a = 321;
         }
     }
 }

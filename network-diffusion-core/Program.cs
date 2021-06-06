@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using network_diffusion_core.DiffusionModels;
 using network_diffusion_core.Model;
 using network_diffusion_core.NetworkGenerators;
-using network_diffusion_core.NetworkStatistics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

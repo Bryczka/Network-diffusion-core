@@ -10,7 +10,7 @@ namespace network_diffusion_core
     public static class Utils
     {
         public static readonly int susceptibleId = 0;
-        public static readonly string susceptibleColor = "green";
+        public static readonly string susceptibleColor = "#afff38";
         public static readonly string susceptibleTitle = "Podatny";
 
         public static readonly int infectedId = 99;

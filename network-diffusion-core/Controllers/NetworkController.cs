@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using network_diffusion_core.Model;
 using network_diffusion_core.NetworkGenerators;
-using network_diffusion_core.NetworkStatistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,15 +56,6 @@ namespace network_diffusion_core.Controller
                     return "";
 
             }
-        }
-
-        [HttpPost("calculateParameters")]
-        public string GetNetwork([FromBody] Network network)
-        {
-            var list = new List<(double meanValue, List<(double, int)> histogramData, List<double> nodesValues)>();
-            list.Add(NetworkStatsCounter.CalculateClusteringRateStatistics(network));
-            list.Add(NetworkStatsCounter.CalculateClusteringRateStatistics(network));
-            return JsonSerializer.Serialize(list);
         }
     }
 }

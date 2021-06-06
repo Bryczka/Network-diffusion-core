@@ -14,7 +14,8 @@ namespace network_diffusion_core.Controllers
     public class SimulationController : ControllerBase
     {
         [HttpPost("{iterationsCount}/{modelType}")]
-        public string GetSiSimultion(int iterationsCount, int modelType, [FromBody] (Network network, List<NodeState> nodesStates) networkWithNodeStates)
+        public string GetSiSimultion(int iterationsCount, int modelType, [FromBody] 
+        (Network network, List<NodeState> nodesStates) networkWithNodeStates)
         {
             if (modelType == 6) //VOTER
             {
